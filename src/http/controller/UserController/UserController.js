@@ -44,16 +44,19 @@ const userController = {
 
     searchTimeSheetByDate: async (req, res) => {
         const orderBy = req.query.orderBy;
-        const { startDate, endDate } = req.query;
+        let { startDate, endDate } = req.query;
+        startDate = new Date(startDate)
+        endDate = new Date(endDate)
         const time_sheets = await timeSheet.searchTimeSheetsByDate(req, res, startDate, endDate, orderBy);
         return res.status(200).json(time_sheets);
     },
 
     checkLogin: async (req, res) => {
+        console.log(req.user);
         if (req.user.id == req.body.userId) {
-            return res.status(200);
+            return res.status(200).json();
         }
-        return res.status(403);
+        return res.status(403).json();
     },
 
     downloadAttendanceSummarySheet: async (req, res) => {

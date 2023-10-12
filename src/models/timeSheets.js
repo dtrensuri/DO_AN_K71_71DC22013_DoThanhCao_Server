@@ -16,9 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   TimeSheets.init({
     employee_id: DataTypes.INTEGER,
-    date: DataTypes.DATE,
-    time_in: DataTypes.TIME,
-    time_out: DataTypes.TIME
+    time_in: DataTypes.DATE,
+    time_out: DataTypes.DATE,
+    log: DataTypes.STRING,
+    time_sheet_status: DataTypes.INTEGER,
   }, {
     sequelize,
     tableName: 'time_sheets',

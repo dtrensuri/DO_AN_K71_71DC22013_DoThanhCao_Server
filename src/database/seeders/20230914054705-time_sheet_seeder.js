@@ -1,24 +1,36 @@
 const db = require('../../models/index');
 const _ = require('lodash');
 const Chance = require('chance');
-const moment = require('moment');
+const { format } = require('date-fns');
 
 'use strict';
 
-const nchane = new Chance(); // Lưu ý viết đúng tên lớp Chance
+const nchane = new Chance();
 
 const createTimeSeed = async (user, dayAgo) => {
   const listTimeSheets = [];
   for (let day = 0; day <= dayAgo; day++) {
-    let time_in = `${nchane.integer({ max: 8, min: 6 })}:${nchane.integer({ max: 60, min: 0 })}`;
-    let time_out = `${nchane.integer({ max: 20, min: 17 })}:${nchane.integer({ max: 60, min: 0 })}`;
+    const hourIn = nchane.integer({ max: 8, min: 6 });
+    const minuteIn = nchane.integer({ max: 60, min: 0 });
+    const hourOut = nchane.integer({ max: 20, min: 17 });
+    const minuteOut = nchane.integer({ max: 60, min: 0 });
+
+    const time_in = new Date();
+
+    time_in.setDate(time_in.getDate() - day);
+    time_in.setHours(hourIn, minuteIn, 0, 0);
+
+    const time_out = new Date();
+    time_out.setDate(time_out.getDate() - day);
+    time_out.setHours(hourOut, minuteOut, 0, 0);
+
+
     listTimeSheets.push({
       employee_id: user.id,
-      date: moment().add(-day, 'days').format('YYYY-MM-DD'),
       time_in: time_in,
       time_out: time_out,
-      createdAt: new Date(time_in),
-      updatedAt: new Date(time_out)
+      createdAt: new Date(),
+      updatedAt: new Date()
     });
   }
   return listTimeSheets;
@@ -31,7 +43,7 @@ module.exports = {
       const users = await db.Employee.findAll();
 
       for (const user of users) {
-        const time = await createTimeSeed(user, [60]);
+        const time = await createTimeSeed(user, [120]);
         timeSheets.push(...time);
       }
 
@@ -43,7 +55,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     try {
-      await queryInterface.bulkDelete('check_in_out', null, {});
+      await queryInterface.bulkDelete('time_sheets', null, {});
     } catch (error) {
       console.error('Error reverting check_in_out seed:', error);
     }

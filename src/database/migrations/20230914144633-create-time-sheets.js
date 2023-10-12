@@ -12,14 +12,11 @@ module.exports = {
       employee_id: {
         type: Sequelize.INTEGER
       },
-      date: {
+      time_in: {
         type: Sequelize.DATE
       },
-      time_in: {
-        type: Sequelize.TIME
-      },
       time_out: {
-        type: Sequelize.TIME
+        type: Sequelize.DATE
       },
       log: {
         type: Sequelize.TEXT,

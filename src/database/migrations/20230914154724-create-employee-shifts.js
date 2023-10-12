@@ -12,15 +12,25 @@ module.exports = {
       employee_id: {
         type: Sequelize.INTEGER
       },
-      shift_id: {
-        type: Sequelize.INTEGER
-      },
-      date: {
-        type: Sequelize.DATE
-      },
       log: {
         type: Sequelize.TEXT,
         allowNull: true,
+      },
+      shift_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      time_in: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
+      time_out: {
+        allowNull: true,
+        type: Sequelize.DATE,
+      },
+      shift_names: {
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

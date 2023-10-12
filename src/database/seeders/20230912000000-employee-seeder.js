@@ -20,7 +20,7 @@ function generateFakeEmployees() {
     gender: nchance.integer({ min: 0, max: 1 }),
     phone: nchance.phone(),
     // id_role: nchance.integer({ min: 1, max: 4 }),
-    hire_date: new Date().getDate(),
+    hire_date: new Date(),
     position: _.sample(['Nhân viên', 'Thực tập', 'DEV', 'BA', 'DA']),
     cccd: `0${nchance.integer({ min: 34200000000, max: 34999999999 })}`,
     createdAt: new Date(),

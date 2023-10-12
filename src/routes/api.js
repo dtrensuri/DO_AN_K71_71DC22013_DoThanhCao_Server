@@ -18,7 +18,7 @@ adminRouter.get('/get-all-user', UserManagerController.getAllUsers)
 adminRouter.get('/get-admin-info', adminController.getInfoAdmin)
 
 userRouter.use(authMiddleware.verifyToken)
-userRouter.head('/check-login', userController.checkLogin)
+userRouter.post('/check-login', userController.checkLogin)
 userRouter.get('/get-info', userController.getInfoUser)
 userRouter.get('/get-time-sheets', userController.getTimeSheets)
 userRouter.get('/search-timesheet/this-month', userController.searchTimeSheetThisMonth)

@@ -59,17 +59,6 @@ module.exports = {
       onUpdate: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('employee_shifts', {
-      fields: ['shift_id'],
-      type: 'foreign key',
-      name: 'PK_EmployeeShifts_Shift',
-      references: {
-        table: "shifts",
-        field: 'id',
-      },
-      onDelete: 'CASCADE',
-      onUpdate: 'CASCADE',
-    });
 
     await queryInterface.addConstraint('late_arrival_requests', {
       fields: ['employee_id'],

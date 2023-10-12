@@ -9,10 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      // employee_id: {
-      //   type: Sequelize.STRING,
-      //   unique: true,
-      // },
       address: {
         type: Sequelize.STRING
       },
@@ -40,11 +36,6 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue: 'Nhân viên',
       },
-      // department: {
-      //   type: Sequelize.INTEGER,
-      //   defaultValue: 1,
-      //   allowNull: false,
-      // },
       employee_status: {
         type: Sequelize.INTEGER,
         defaultValue: '1',

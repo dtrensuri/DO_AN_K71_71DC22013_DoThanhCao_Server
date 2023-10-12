@@ -17,6 +17,14 @@ const timeSheet = {
             }
         }
     },
+    // getTimeShifts: async (req, res) => {
+    //     try {
+    //         let id_employee = req.employee.id;
+    //         const page = _.parseInt(req.query.page) || 1;
+    //     } catch (e) {
+    //         console.error(e.message)
+    //     }
+    // },
 
     getTimeSheets: async (req, res) => {
         try {
@@ -67,7 +75,7 @@ const timeSheet = {
             let time_sheets = await db.TimeSheet.findAll({
                 where: {
                     employee_id: id_employee,
-                    date: {
+                    time_in: {
                         [Op.between]: [startDate, endDate],
                     },
                 },
@@ -75,14 +83,14 @@ const timeSheet = {
                 offset: (offset),
                 raw: true,
                 nest: true,
-                order: [[db.sequelize.col('date'), orderBy]]
+                order: [[db.sequelize.col('time_in'), orderBy]]
             })
 
             let time_sheets_count = await db.TimeSheet.count(
                 {
                     where: {
                         employee_id: id_employee,
-                        date: {
+                        time_in: {
                             [Op.between]: [startDate, endDate],
                         },
                     }
@@ -107,13 +115,13 @@ const timeSheet = {
         try {
             let time_sheets = await db.TimeSheet.findAndCountAll({
                 where: {
-                    date: {
+                    time_in: {
                         [Op.between]: [startDate, endDate],
                     },
                 },
                 raw: true,
                 nest: true,
-                order: [[db.sequelize.col('date'), orderBy]]
+                order: [[db.sequelize.col('time_in'), orderBy]]
             })
 
             console.log(time_sheets);
